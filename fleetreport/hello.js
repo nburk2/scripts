@@ -4,14 +4,14 @@
 
    let pdfParser = new PDFParser();
   //  local
-  //  var pdfPath = "/Users/nathanburk/projects/scripts/fleetreport/fleetcor2.pdf"
-  //  var outputPath = "/Users/nathanburk/projects/scripts/fleetreport/Weekly Fuelman.csv"
+   var pdfPath = "/Users/nathanburk/projects/scripts/fleetreport/fleetcor3.pdf"
+   var outputPath = "/Users/nathanburk/projects/scripts/fleetreport/Weekly Fuelman.csv"
   // shared rds2  mac
   //  var pdfPath = "/Volumes/Fuelman/fleetcor.pdf"
   //  var outputPath = "/Volumes/Fuelman/Weekly Fuelman.csv"
   // shared rds2  windows
-   var pdfPath = "\\\\RDS2\\Fuelman\\fleetcor.pdf"
-   var outputPath = "\\\\RDS2\\Fuelman\\Weekly Fuelman.csv"
+  //  var pdfPath = "\\\\RDS2\\Fuelman\\fleetcor.pdf"
+  //  var outputPath = "\\\\RDS2\\Fuelman\\Weekly Fuelman.csv"
 
    var   fuelmanMap = []
 
@@ -67,8 +67,8 @@ function setSiteData(currentSiteIndex, data, startIndex, endIndex ) {
       if(data[startIndex].R[0].T.includes("%24") ) {
         data[startIndex].R[0].T = data[startIndex].R[0].T.replace("%24", "")
         data[startIndex].R[0].T = data[startIndex].R[0].T.replace("%2C", "")
-
-        if(data[startIndex].R[0].T.includes("(") && !data[startIndex].R[0].T.includes(")")) {
+// (data[startIndex].R[0].T.includes("(") && !data[startIndex].R[0].T.includes(")")) ||
+        if( data[startIndex].R[0].T.endsWith('.')) {
           data[startIndex].R[0].T = data[startIndex].R[0].T + data[startIndex + 1].R[0].T
           data[startIndex + 1].R[0].T = data[startIndex + 2].R[0].T.replace("%24", "")
         }
@@ -109,6 +109,7 @@ function setSiteData(currentSiteIndex, data, startIndex, endIndex ) {
 }
 
 function addMoneySign(value) {
+  // parenthesis checks incase one end gets chopped off into a different index upon extraction
     if(value.includes("(")) {
       if(!value.includes(")")) {
         return value.replace("(","($") + ")"

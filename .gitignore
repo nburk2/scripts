@@ -1,3 +1,9 @@
 fleetreport/node_modules/**
 fleetreport/node_modules/*
 fleetreport/fleetreportnode-*
+fleetVehicles/build/*
+fleetVehicles/gradle/*
+fleetVehicles/.gradle/*
+fleetLocations/build/*
+fleetLocations/gradle/*
+fleetLocations/.gradle/*
